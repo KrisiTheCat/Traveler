@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destination Finder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Where do you want to go?</h1>
+        <input type="text" id="destination" placeholder="Enter a city...">
+        <button onclick="searchDestination()">Find</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        async function searchDestination() {
+            let city = document.getElementById("destination").value;
+            let result = document.getElementById("result");
+
+            if (!city) {
+                result.innerHTML = "Please enter a city.";
+                return;
+            }
+
+            const apiKey = ""; 
+            const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${city}&key=${apiKey}`;
+
+            try {
+                let response = await fetch(url);
+                let data = await response.json();
+				
+				console.log(data);
+				console.log(data.status);
+				console.log(data.status == 'OK');
+
+                if (data.status == 'OK') {
+                    let lat = data.results[0].geometry.location.lat;
+                    let lng = data.results[0].geometry.location.lng;
+                    result.innerHTML = `Latitude: ${lat}, Longitude: ${lng}`;
+                } else {
+                    result.innerHTML = "City not found. Try another one!";
+                }
+            } catch (error) {
+			console.log(error);
+                result.innerHTML = "Error fetching data. Please try again.";
+            }
+        }
+    </script>
+</body>
+</html>
