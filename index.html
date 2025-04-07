@@ -5,48 +5,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Destination Finder</title>
     <link rel="stylesheet" href="style.css">
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCulfZJd7fu7nxXmc3cxjEs-M4Or3LZhzU&loading=async&libraries=places">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="currency.js"></script>
+    <script src="script.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Where do you want to go?</h1>
-        <input type="text" id="destination" placeholder="Enter a city...">
-        <button onclick="searchDestination()">Find</button>
-        <p id="result"></p>
+    <div class="search-screen" id="searchScreen">
+        <div class="search-content">
+            <h1>Where do you want to go?</h1>
+            <p class="subtitle">Discover amazing cities around the world</p>
+            
+            <div class="search-input">
+                <input type="text" id="destination" placeholder="Enter a city name..." value="Sofia">
+                <button id="searchCityBtn">Explore</button>
+            </div>
+            <p id="result"></p>
+        </div>
+    </div>
+
+    <div id="cityInfo" style="display: none;">
+        <header>
+            <div class="container">
+                <h1 id="cityName">Paris</h1>
+                <div id="cityDescription" class="subtitle">France • The City of Light</div>
+            </div>
+        </header>
+        
+        <div class="container">
+            <div class="card-grid">
+                <!-- City Overview Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-info-circle"></i> City Overview
+                    </div>
+                    <div class="card-body">
+                        <div class="info-item">
+                            <span class="info-label">Country</span>
+                            <span id="countryLbl">France</span>
+                        </div>    
+                        <div class="info-item">
+                            <span class="info-label">Country code</span>
+                            <span id="countryCodeLbl">FR</span>
+                        </div>    
+                        <div class="map-container">
+                            <div id="mapDiv" class="map-placeholder">
+                                Interactive Map Would Display Here
+                            </div>
+                        </div>
+                        <div class="coordinates">
+                            <span>Latitude: <span id="latLbl">48.8566</span>° N</span>
+                            <span>Longitude: <span id="lngLbl">48.8566</span>° E</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Currency & Finance Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-money-bill-wave"></i> Currency & Exchange
+                    </div>
+                    <div class="card-body">
+                        <div class="info-item">
+                            <span class="info-label">Currency</span>
+                            <span id="currencyLbl">Euro</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Currency code</span>
+                            <span id="currencyCodeLbl">EUR</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Exchange Rate</span>
+                            <span id="exchangeLbl">1 EUR = 1.95 BGN</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Weather Conditions Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-cloud-sun"></i> Current Weather
+                    </div>
+                    <div class="card-body">
+                        <div class="weather-display">
+                            <div class="weather-icon"><img id="weatherIcon" /></div>
+                            <div class="temperature"><span id="weatherTemp"></span>°C</div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Description</span>
+                            <span id="weatherDescription"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Wind</span>
+                            <span><span id="windSpeed"></span> km/h • <span id="windDir"></span></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Feels like</span>
+                            <span><span id="weatherFeels"></span>°C</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Humidity</span>
+                            <span><span id="weatherHumidity"></span>%</span>
+                        </div>
+
+                        <div class="forecast-container">
+                            <h3 class="forecast-title">10-Day Forecast</h3>
+                            <div class="forecast-carousel">
+                                <button id="carouselPrev" class="carousel-btn prev">❮</button>
+                                <div class="forecast-scroller">
+                                    <div class="forecast-days" id="forecastDiv">
+                                    </div>
+                                </div>
+                                <button id="carouselNext" class="carousel-btn next" >❯</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="container">
+                <p>Coursework</p>
+                <p>Last updated: June 15, 2023</p>
+            </div>
+        </footer>
     </div>
 
     <script>
-        async function searchDestination() {
-            let city = document.getElementById("destination").value;
-            let result = document.getElementById("result");
-
-            if (!city) {
-                result.innerHTML = "Please enter a city.";
-                return;
-            }
-
-            const apiKey = ""; 
-            const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${city}&key=${apiKey}`;
-
-            try {
-                let response = await fetch(url);
-                let data = await response.json();
-				
-				console.log(data);
-				console.log(data.status);
-				console.log(data.status == 'OK');
-
-                if (data.status == 'OK') {
-                    let lat = data.results[0].geometry.location.lat;
-                    let lng = data.results[0].geometry.location.lng;
-                    result.innerHTML = `Latitude: ${lat}, Longitude: ${lng}`;
-                } else {
-                    result.innerHTML = "City not found. Try another one!";
-                }
-            } catch (error) {
-			console.log(error);
-                result.innerHTML = "Error fetching data. Please try again.";
-            }
-        }
+        
+        // Allow searching by pressing Enter key
+       
     </script>
 </body>
 </html>

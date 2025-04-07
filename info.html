@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CityScape | Paris, France</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 60px 20px 80px;
+            text-align: center;
+            position: relative;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: -40px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            background: var(--accent);
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .weather-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .weather-icon {
+            font-size: 3rem;
+            margin-right: 20px;
+        }
+        
+        .temperature {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        
+        .weather-details {
+            flex-grow: 1;
+        }
+        
+        .flight-item {
+            padding: 15px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .flight-item:last-child {
+            border-bottom: none;
+        }
+        
+        .flight-airline {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .flight-time {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .flight-price {
+            font-weight: 700;
+            color: var(--warning);
+            margin-top: 5px;
+            text-align: right;
+        }
+        
+        .map-container {
+            height: 250px;
+            background-color: #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 15px;
+            position: relative;
+        }
+        
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #dddddd 25%, #f0f0f0 25%, #f0f0f0 50%, #dddddd 50%, #dddddd 75%, #f0f0f0 75%, #f0f0f0 100%);
+            background-size: 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-weight: 600;
+        }
+        
+        .coordinates {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-family: monospace;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,53 +1,507 @@
-body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #89f7fe, #66a6ff);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+:root {
+    --primary: #a872de;
+    --secondary: #764ba2;
+    --secondaryDark: #481d74;
+    --accent: #a872de;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --success: #4cc9f0;
+    --warning: #f72585;
+}
+
+body{
+    margin: 0px;
+}
+
+#cityInfo {
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
+    padding: 0;
+    background-color: #f5f7fa;
+    color: var(--dark);
+    line-height: 1.6;
 }
 
 .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background: linear-gradient(180deg, var(--secondary), var(--secondaryDark));
+    color: white;
+    padding: 60px 20px 80px;
     text-align: center;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin-bottom: 60px;
+    box-shadow: 0 14px 13px rgba(0, 0, 0, 0.3);
 }
 
 h1 {
-    color: #333;
-    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
 
-input {
-    width: 80%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
+.subtitle {
+    font-size: 1.5rem;
+    opacity: 0.9;
+    margin-top: 10px;
 }
 
-button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    font-size: 16px;
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: -40px;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+}
+
+.card-header {
+    background: var(--accent);
     color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
+    padding: 15px 20px;
+    font-size: 1.3rem;
+    font-weight: 600;
 }
 
-button:hover {
-    background-color: #0056b3;
+.card-body {
+    padding: 20px;
 }
 
-p {
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.weather-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.weather-icon {
+    font-size: 3rem;
+    margin-right: 20px;
+}
+
+.temperature {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.weather-details {
+    flex-grow: 1;
+}
+
+.day-icon img {
+    width: 70%;
+}
+
+.flight-item {
+    padding: 15px 0;
+    border-bottom: 1px dashed #ddd;
+}
+
+.flight-item:last-child {
+    border-bottom: none;
+}
+
+.flight-airline {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.flight-time {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.flight-price {
+    font-weight: 700;
+    color: var(--warning);
+    margin-top: 5px;
+    text-align: right;
+}
+
+.map-container {
+    height: 250px;
+    background-color: #eee;
+    border-radius: 8px;
+    overflow: hidden;
     margin-top: 15px;
-    font-size: 18px;
-    color: #333;
+    position: relative;
+}
+
+.map-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #dddddd 25%, #f0f0f0 25%, #f0f0f0 50%, #dddddd 50%, #dddddd 75%, #f0f0f0 75%, #f0f0f0 100%);
+    background-size: 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-weight: 600;
+}
+
+.coordinates {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-family: monospace;
+}
+
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 60px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+.search-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.search-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.2;
+    z-index: 0;
+}
+
+.search-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    width: 100%;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.search-screen h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.search-screen p.subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.search-input {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#destination {
+    flex: 1;
+    padding: 18px 25px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+#destination:focus {
+    outline: none;
+    background: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.search-screen button {
+    padding: 18px 35px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.search-screen button:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+#result {
+    margin-top: 25px;
+    min-height: 24px;
+    font-weight: 500;
+}
+
+.floating-icons {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.floating-icons i {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.1);
+    font-size: 2rem;
+    animation: float 15s infinite linear;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-100vh) rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .search-content {
+        padding: 30px 20px;
+    }
+    
+    .search-screen h1 {
+        font-size: 2.5rem;
+    }
+    
+    .search-input {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .search-screen button {
+        width: 100%;
+    }
+}
+
+
+
+.forecast-container {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.forecast-title {
+    margin-bottom: 15px;
+    color: var(--accent);
+    font-size: 1.2rem;
+}
+
+.forecast-carousel {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.carousel-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: black;
+    font-size: 1.2rem;
+    padding: 5px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.carousel-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.forecast-scroller {
+    overflow: hidden;
+    width: 100%;
+}
+
+.forecast-days {
+    display: flex;
+    gap: 5px;
+    transition: transform 0.5s ease;
+}
+
+.forecast-day-selected{
+    scale: 1 !important;
+}
+
+.forecast-day {
+    min-width: 80px;
+    scale: 0.9;
+    padding: 15px 10px;
+    background: linear-gradient(180deg, rgba(180, 180, 180, 0.1), rgba(180, 180, 180, 0.05));
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(180, 180, 180, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* margin: 5px 15px;
+    scroll-margin: 5px 15px; */
+    margin: 5px 2px;
+    min-width: calc(33% - 31px);
+}
+
+.forecast-day:hover {
+    background: linear-gradient(180deg, rgba(180, 180, 180, 0.15), rgba(180, 180, 180, 0.1));
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    border-color: rgba(180, 180, 180, 0.2);
+}
+
+.day-name {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #949494;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.day-date {
+    font-size: 0.7rem;
+    color: rgba(180, 180, 180, 0.7);
+    margin-bottom: 10px;
+}
+
+.day-icon {
+    font-size: 2rem;
+    margin: 10px 0;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.day-temp {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 10px 0;
+    color: gray;
+}
+
+.day-details {
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.8rem;
+    margin-top: 8px;
+}
+
+.high {
+    color: #ff9e9e;
+    font-weight: 600;
+}
+
+.low {
+    color: #a5d8ff;
+    font-weight: 600;
+}
+
+.weather-condition {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 8px;
+    text-transform: capitalize;
+}
+
+/* For precipitation chance */
+.day-precipitation {
+    margin-top: 5px;
+    font-size: 0.7rem;
+    color: #74b9ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .forecast-day {
+        min-width: 70px;
+        padding: 12px 8px;
+    }
+    
+    .day-icon {
+        font-size: 1.8rem;
+    }
+    
+    .day-temp {
+        font-size: 1.1rem;
+    }
 }

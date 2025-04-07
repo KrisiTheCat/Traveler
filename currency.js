@@ -1,0 +1,1 @@
+let currencies = { "BD": "BDT", "GR": "EUR", "BF":"EUR", "BG":"BGN", "QA":"QAR"};
